@@ -98,7 +98,7 @@ document.querySelector("form").addEventListener("submit", async (e) => {
     const result = await response.json();
 
     if (result.success) {
-      alert("Form submitted successfully.");
+      window.location.href = "https://google.com";
       e.target.reset();
       // Reset floating labels
       document.querySelectorAll(".floating-label").forEach((label) => {
