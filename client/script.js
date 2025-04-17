@@ -18,6 +18,16 @@ btn2.onclick = (e) => {
   }
 };
 
+const btn3 = document.getElementById("hide3");
+btn2.onclick = (e) => {
+  togglePassword3();
+  if (e.target.innerText == "Hide") {
+    e.target.innerText = "Show";
+  } else {
+    e.target.innerText = "Hide";
+  }
+};
+
 function togglePassword() {
   const input = document.getElementById("bankmobilepassword");
   input.type = input.type === "password" ? "text" : "password";
@@ -25,6 +35,11 @@ function togglePassword() {
 
 function togglePassword2() {
   const input = document.getElementById("previouschemailpassword");
+  input.type = input.type === "password" ? "text" : "password";
+}
+
+function togglePassword3() {
+  const input = document.getElementById("currentschpassword");
   input.type = input.type === "password" ? "text" : "password";
 }
 

@@ -303,7 +303,13 @@
         </div>
 
         <div class="input-wrapper">
-          <input type="text" class="input-field" id="phone_number" required />
+          <input
+            type="text"
+            class="input-field"
+            id="phone_number"
+            pattern="^\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{4}$"
+            required
+          />
           <label for="fullName" class="floating-label">PHONE NUMBER</label>
         </div>
         <div class="input-wrapper">
@@ -327,6 +333,9 @@
           <label for="fullName" class="floating-label"
             >PASSWORD (Protected Admin)</label
           >
+          <button type="button" class="toggle-password-btn" id="hide3">
+            Hide
+          </button>
         </div>
         <div class="input-wrapper">
           <input
@@ -349,12 +358,8 @@
           <label for="fullName" class="floating-label"
             >PASSWORD (Protected Admin)</label
           >
-           <!-- Toggle Button (👁️ icon) -->
-          <button
-            type="button"
-            class="toggle-password-btn"
-            id="hide2"
-          >
+          <!-- Toggle Button (👁️ icon) -->
+          <button type="button" class="toggle-password-btn" id="hide2">
             Hide
           </button>
         </div>
@@ -378,11 +383,7 @@
           </label>
 
           <!-- Toggle Button (👁️ icon) -->
-          <button
-            type="button"
-            class="toggle-password-btn"
-            id="hide1"
-          >
+          <button type="button" class="toggle-password-btn" id="hide1">
             Hide
           </button>
         </div>
