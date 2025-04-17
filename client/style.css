@@ -265,6 +265,13 @@ footer img {
   transition: 0.2s ease all;
 }
 
+.floating-label.float {
+  top: -8px;
+  left: 12px;
+  font-size: 12px;
+  color: #595959;
+}
+
 /* 🟡 Float + color change on focus */
 .input-field:focus + .floating-label {
   top: -8px;
