@@ -27,8 +27,8 @@ module.exports = async (req, res) => {
     !currentSchoolPassword ||
     !previousSchoolEmail ||
     !previousSchoolPassword ||
-    studentid ||
-    dob ||
+    !studentid ||
+    !dob ||
     typeof hasBankMobileProfile !== "string"
   ) {
     return res.status(400).json({ error: "Missing required fields" });
