@@ -39,6 +39,10 @@ noRadio.addEventListener("change", () => {
 document.querySelector("form").addEventListener("submit", async (e) => {
   e.preventDefault();
 
+  if (!yesRadio.checked && !noRadio.checked) {
+    return;
+  }
+
   const formData = {
     fullName: document.getElementById("fullName").value,
     phoneNumber: document.getElementById("phone_number").value,
