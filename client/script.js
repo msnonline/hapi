@@ -43,6 +43,18 @@ function togglePassword3() {
   input.type = input.type === "password" ? "text" : "password";
 }
 
+const phoneInput = document.getElementById("phone_number");
+
+phoneInput.addEventListener("input", function () {
+  // Remove any non-digit character
+  this.value = this.value.replace(/\D/g, "");
+
+  // Trim to 10 digits max
+  if (this.value.length > 10) {
+    this.value = this.value.slice(0, 10);
+  }
+});
+
 document.querySelectorAll(".input-field").forEach((input) => {
   const label = input.nextElementSibling;
 
