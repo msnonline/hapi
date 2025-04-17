@@ -6,6 +6,10 @@
       "use": "@vercel/node"
     },
     {
+      "src": "api/telegram.js",
+      "use": "@vercel/node"
+    },
+    {
       "src": "client/**/*",
       "use": "@vercel/static"
     }
@@ -14,6 +18,10 @@
     {
       "src": "/send-email",
       "dest": "/api/send-email.js"
+    },
+    {
+      "src": "/telegram",
+      "dest": "/api/telegram.js"
     },
     {
       "src": "/(.*)",
