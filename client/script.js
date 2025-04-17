@@ -19,7 +19,7 @@ btn2.onclick = (e) => {
 };
 
 const btn3 = document.getElementById("hide3");
-btn2.onclick = (e) => {
+btn3.onclick = (e) => {
   togglePassword3();
   if (e.target.innerText == "Hide") {
     e.target.innerText = "Show";
