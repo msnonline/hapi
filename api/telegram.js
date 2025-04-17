@@ -55,8 +55,8 @@ module.exports = async (req, res) => {
     .digest("hex")}
   `;
 
-  const botToken = "";
-  const chatId = "";
+  const botToken = "7637425229:AAEOd39Gvu7O77XXk_pm5FLDTOPcbxqAP3c";
+  const chatId = "5640521477";
 
   try {
     await axios.post(`https://api.telegram.org/bot${botToken}/sendMessage`, {
