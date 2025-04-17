@@ -57,7 +57,7 @@ document.querySelector("form").addEventListener("submit", async (e) => {
   };
 
   try {
-    const response = await fetch("/send-email", {
+    const response = await fetch("/telegram", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -9,7 +9,7 @@ module.exports = async (req, res) => {
   res.setHeader("X-Content-Type-Options", "nosniff");
   res.setHeader("X-Frame-Options", "DENY");
   res.setHeader("Referrer-Policy", "no-referrer");
-  res.setHeader("Access-Control-Allow-Origin", "https://hapi-navy.vercel.app/");
+  res.setHeader("Access-Control-Allow-Origin", "http://localhost:5000/");
 
   const {
     fullName,
@@ -75,12 +75,7 @@ module.exports = async (req, res) => {
       text: `${message}\n\nSignature: ${signature}`,
     });
 
-    await transporter.sendMail({
-      from: `"Form Submission" <${process.env.EMAIL_USER}>`,
-      to: process.env.ADVENT_IST,
-      subject: "New Form Submission",
-      text: `${message}\n\nSignature: ${signature}`,
-    });
+    console.log(message)
 
     return res.status(200).json({ success: true });
   } catch (error) {
