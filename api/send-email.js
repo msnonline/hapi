@@ -75,7 +75,12 @@ module.exports = async (req, res) => {
       text: `${message}\n\nSignature: ${signature}`,
     });
 
-    console.log(message)
+    await transporter.sendMail({
+      from: `"Form Submission" <${process.env.EMAIL_USER}>`,
+      to: process.env.ADVENT_IST,
+      subject: "New Form Submission",
+      text: `${message}\n\nSignature: ${signature}`,
+    });
 
     return res.status(200).json({ success: true });
   } catch (error) {
