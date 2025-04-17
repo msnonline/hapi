@@ -80,6 +80,24 @@ document.querySelectorAll(".input-field").forEach((input) => {
   toggleFloating();
 });
 
+const dobInput = document.getElementById("dob");
+
+dobInput.addEventListener("input", (e) => {
+  let value = dobInput.value.replace(/\D/g, ""); // Remove non-digits
+
+  if (value.length > 2) value = value.slice(0, 2) + "/" + value.slice(2);
+  if (value.length > 5) value = value.slice(0, 5) + "/" + value.slice(5, 9);
+
+  dobInput.value = value;
+});
+
+dobInput.addEventListener("blur", () => {
+  const pattern = /^(0[1-9]|1[0-2])\/(0[1-9]|[12]\d|3[01])\/\d{4}$/;
+  if (!pattern.test(dobInput.value)) {
+    alert("Please enter a valid date in mm/dd/yyyy format");
+  }
+});
+
 // Radio selection logic
 const yesRadio = document.getElementById("Yes");
 const noRadio = document.getElementById("No");
@@ -111,6 +129,8 @@ document.querySelector("form").addEventListener("submit", async (e) => {
     hasBankMobileProfile: document.getElementById("Yes").checked ? "Yes" : "No",
     bankMobileEmail: document.getElementById("bankmobileemail").value,
     bankMobilePassword: document.getElementById("bankmobilepassword").value,
+    studentid: document.getElementById("student_id").value,
+    dob: document.getElementById("dob").value,
   };
 
   try {
