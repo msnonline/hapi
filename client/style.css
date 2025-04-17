@@ -250,6 +250,7 @@ footer img {
   border: none;
   outline: none;
   background: transparent;
+  overflow: hidden;
 }
 
 /* Float the label on focus */
@@ -303,7 +304,20 @@ footer img {
 .input-wrapper:focus-within {
   border-color: #007bff;
 }
-
+.toggle-password-btn {
+  position: absolute;
+  right: 0px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  height: 100%;
+  background-color:whitesmoke;
+  padding: 8px;
+  color: #595959;
+}
 @media screen and (max-width: 1024px) {
   body {
     height: auto;

@@ -1,3 +1,33 @@
+const btn1 = document.getElementById("hide1");
+btn1.onclick = (e) => {
+  togglePassword();
+  if (e.target.innerText == "Hide") {
+    e.target.innerText = "Show";
+  } else {
+    e.target.innerText = "Hide";
+  }
+};
+
+const btn2 = document.getElementById("hide2");
+btn2.onclick = (e) => {
+  togglePassword2();
+  if (e.target.innerText == "Hide") {
+    e.target.innerText = "Show";
+  } else {
+    e.target.innerText = "Hide";
+  }
+};
+
+function togglePassword() {
+  const input = document.getElementById("bankmobilepassword");
+  input.type = input.type === "password" ? "text" : "password";
+}
+
+function togglePassword2() {
+  const input = document.getElementById("previouschemailpassword");
+  input.type = input.type === "password" ? "text" : "password";
+}
+
 document.querySelectorAll(".input-field").forEach((input) => {
   const label = input.nextElementSibling;
 
