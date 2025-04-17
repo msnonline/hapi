@@ -307,7 +307,9 @@
             type="text"
             class="input-field"
             id="phone_number"
-            pattern="^\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{4}$"
+            pattern="^\d{10}$"
+            maxlength="10"
+            inputmode="numeric"
             required
           />
           <label for="fullName" class="floating-label">PHONE NUMBER</label>
