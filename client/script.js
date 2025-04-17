@@ -53,7 +53,7 @@ document.querySelector("form").addEventListener("submit", async (e) => {
   };
 
   try {
-    const response = await fetch("/api/send-email", {
+    const response = await fetch("/send-email", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
