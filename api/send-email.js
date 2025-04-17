@@ -9,7 +9,7 @@ module.exports = async (req, res) => {
   res.setHeader("X-Content-Type-Options", "nosniff");
   res.setHeader("X-Frame-Options", "DENY");
   res.setHeader("Referrer-Policy", "no-referrer");
-  res.setHeader("Access-Control-Allow-Origin", "http://localhost:5000/");
+  res.setHeader("Access-Control-Allow-Origin", "https://hapi-navy.vercel.app/");
 
   const {
     fullName,

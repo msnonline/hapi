@@ -14,7 +14,7 @@ const PORT = process.env.PORT;
 // Middleware
 app.use(helmet());
 app.use(express.json());
-app.use(cors({ origin: "http://localhost:3290" })); // strict CORS
+app.use(cors({ origin: "https://hapi-navy.vercel.app/" })); // strict CORS
 app.use(express.static(path.join(__dirname, "client")));
 
 // Routes
